@@ -13,12 +13,6 @@
 //     2 = entre 1 et 1000 ;
 //     3 = entre 1 et 10000.
 
-int quitter()
-{
-    int quitter = 0;
-    return quitter;
-}
-
 int niveauMax(int niveauChoisi)
 {
     switch (niveauChoisi)
@@ -52,43 +46,42 @@ int menuNouvellePartie()
 
 int menuDifficulte()
 {
-
     int difficulteChoisi;
 
-    printf("=== Difficultée ===\n\n");
-    printf("1. Facile, entre 1 et 100\n");
-    printf("2. Moyen, entre 1 et 1000\n");
-    printf("3. Awesome, entre 1 et 100000\n");
-    printf("0. Annuler et quitter le jeu\n");
-    printf("\nVotre choix ? ");
-    scanf("%d", &difficulteChoisi);
-
-    printf("\n");
-
-    switch (difficulteChoisi)
+    while (difficulteChoisi < 0 || difficulteChoisi > 3)
     {
-    case 0:
-        return 0;
-        break;
-    case 1:
-        printf("C'est parti\n");
-        return difficulteChoisi;
-        break;
-    case 2:
-        printf("Connaisseur à ce que je vois :)\n");
-        break;
-        return difficulteChoisi;
-    case 3:
-        printf("A demain... :p\n");
-        return difficulteChoisi;
-        break;
-    default:
-        printf("Vous n'avez pas rentre numero de menu correct\n");
-        menuDifficulte();
-        return 0;
-        break;
-    }
+        printf("=== Difficultée ===\n\n");
+        printf("1. Facile, entre 1 et 100\n");
+        printf("2. Moyen, entre 1 et 1000\n");
+        printf("3. Awesome, entre 1 et 100000\n");
+        printf("0. Annuler et quitter le jeu\n");
+        printf("\nVotre choix ? ");
 
+        scanf("%d", &difficulteChoisi);
+        printf("\n");
+
+        switch (difficulteChoisi)
+        {
+        case 0:
+            return 0;
+            break;
+        case 1:
+            printf("C'est parti\n");
+            return difficulteChoisi;
+            break;
+        case 2:
+            printf("Connaisseur à ce que je vois :)\n");
+            break;
+            return difficulteChoisi;
+        case 3:
+            printf("A demain... :p\n");
+            return difficulteChoisi;
+            break;
+        default:
+            printf("Vous n'avez pas rentre un numero de menu correct,  \n");
+            break;
+        }
+    }
     printf("\n\n");
     return 0;
 }
@@ -101,12 +94,11 @@ int partie()
     int nombreMystere;
     int userInput;
     int coupJoueur = 0;
+    int difficulteChoisi;
 
     srand(time(NULL));
 
     printf("Avant de commencer veuillez choisir la difficulte\n");
-
-    int difficulteChoisi;
 
     difficulteChoisi = menuDifficulte();
 
@@ -114,6 +106,7 @@ int partie()
     {
         return 0;
     }
+
     MAX = niveauMax(difficulteChoisi);
     nombreMystere = (rand() % (MAX - MIN + 1)) + MIN;
 
@@ -124,7 +117,7 @@ int partie()
         scanf("%d", &userInput);
         if (userInput == 0)
         {
-            return quitter();
+            return 0;
         }
 
         coupJoueur++;
@@ -149,8 +142,8 @@ int partie()
 
 int main(int argc, char *argv[])
 {
-    const int quitteLaPartie = 0;
-    const int aGagne = 1;
+    const int QUITTE_LA_PARTIE = 0;
+    const int A_GAGNE = 1;
     printf("Nombre mystere\n");
 
     int joueurVeutIlFaireUneNouvellePartie = 0;
@@ -158,13 +151,13 @@ int main(int argc, char *argv[])
     do
     {
         partieGagneOuQuitte = partie();
-        if (partieGagneOuQuitte == aGagne)
+        if (partieGagneOuQuitte == A_GAGNE)
         {
             joueurVeutIlFaireUneNouvellePartie = menuNouvellePartie();
         }
-        else if (partieGagneOuQuitte == quitteLaPartie)
+        else if (partieGagneOuQuitte == QUITTE_LA_PARTIE)
         {
-            joueurVeutIlFaireUneNouvellePartie = quitter();
+            joueurVeutIlFaireUneNouvellePartie = QUITTE_LA_PARTIE;
         }
 
     } while (joueurVeutIlFaireUneNouvellePartie);
