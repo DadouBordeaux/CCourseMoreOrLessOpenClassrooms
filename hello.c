@@ -2,17 +2,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-// Lorsque l'utilisateur a trouvé le nombre mystère, le programme s'arrête. Demandez si le joueur veut faire une autre partie !
-
-// Il vous faudra faire une boucle qui englobera la quasi-totalité de votre programme. Cette boucle devra se répéter TANT QUE l'utilisateur n'a pas demandé à arrêter le programme.
-// Je vous conseille de rajouter une variable booléenne du type continuerPartie initialisée à 1 au départ.
-// Si l'utilisateur demande à arrêter le programme, vous mettrez la variable à 0 et le programme s'arrêtera.
-
-// Créez plusieurs niveaux de difficulté. Au début, faites un menu qui demande le niveau de difficulté. Par exemple :
-//     1 = entre 1 et 100 ;
-//     2 = entre 1 et 1000 ;
-//     3 = entre 1 et 10000.
-
 int niveauMax(int niveauChoisi)
 {
     switch (niveauChoisi)
@@ -71,8 +60,8 @@ int menuDifficulte()
             break;
         case 2:
             printf("Connaisseur à ce que je vois :)\n");
-            break;
             return difficulteChoisi;
+            break;
         case 3:
             printf("A demain... :p\n");
             return difficulteChoisi;
@@ -144,10 +133,10 @@ int main(int argc, char *argv[])
 {
     const int QUITTE_LA_PARTIE = 0;
     const int A_GAGNE = 1;
-    printf("Nombre mystere\n");
-
     int joueurVeutIlFaireUneNouvellePartie = 0;
     int partieGagneOuQuitte;
+    printf("Nombre mystere\n");
+
     do
     {
         partieGagneOuQuitte = partie();
